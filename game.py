@@ -19,30 +19,36 @@ def choice1(name):
     choice=input("Type 'enter' or 'run': ").lower()
 
     if choice == 'enter':
-        slow_print("You barely step into the darkness..\n")
+        slow_print("You step into the darkness...\n")
         find_item()
-        choice2(name)
+        choose_tunnnel()
     elif choice == 'run':
         slow_print("You run away safely but you'll never know what could've been. GAME OVER....")
     else:
         slow_print("I didn't understand that.")
         choice1(name)
 
-def choice2(name):
-    slow_print("Inside, you see two tunnels: one to the LEFT and one on the RIGHT.")
-    decision=input("Type 'left' or 'right': ").lower()
+def choose_tunnnel():
+    slow_print("Inside, you see three tunnels: one to the LEFT and one on the RIGHT and on in the MIDDLE.")
+    decision=input("where do you wanna go: ").lower()
 
     if decision=="left":
-        slow_print("Oh no! You walked straight into a pit of snakes!")
+        slow_print("Oh no! You walked straight into a pit of snakes!🐍")
         slow_print("You're out of the game.")
         slow_print("GAME OVER!")    
     elif decision=='right':
-        slow_print("You find a chest with gold!")
         combat()
-        slow_print(f"Congratulations, {name}! You win!")
+        if "sword" in inventory:
+            print("You search the monster's lair and find a shiny key!")
+            inventory.append("key")
+    elif decision=='middle':
+        if "key" in inventory:
+            print("You unlock a hidden gate...it leads to a golden treasure room! 🏆 YOU WIN!")
+        else:
+            print("The gate is locked. You need a key to enter")
     else:
         slow_print("Try again...") 
-        choice2(name)      
+        choose_tunnnel()      
 
 def find_item():
     chances=random.randint(2,12)
@@ -71,12 +77,11 @@ def find_item():
         else:
             print("You've left the key behind.")
 
-
 def combat():
     slow_print("\nA wild monster starts appearing in front of you...")
     if "sword" in inventory:
         slow_print("You draw your sword and fight bravely...")
-        print("You've defeated the moster")
+        print("You've defeated the monster")
     else:
         chance=random.randint(2,9)
         if chance<4:
